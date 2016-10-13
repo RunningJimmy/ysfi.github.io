@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Jacman基于Pacman修改的Hexo主题 | 杨少峰个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Jacman 基于 Pacman 主题修改而来">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jacman基于Pacman修改的Hexo主题">
+<meta property="og:url" content="http://yoursite.com/2015/03/22/关于配置hexo问题/index.html">
+<meta property="og:site_name" content="杨少峰个人博客">
+<meta property="og:description" content="Jacman 基于 Pacman 主题修改而来">
+<meta property="og:updated_time" content="2016-10-13T06:19:34.001Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jacman基于Pacman修改的Hexo主题">
+<meta name="twitter:description" content="Jacman 基于 Pacman 主题修改而来">
+  
+    <link rel="alternative" href="/atom.xml" title="杨少峰个人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/icon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Shao Feng</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">博客首页</a></li>
+                        
+                            <li><a href="/">作品展示</a></li>
+                        
+                            <li><a href="/">留言打卡</a></li>
+                        
+                            <li><a href="/">前端导航</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=-czFyc-MyM3FzMW9jIzTnpKQ" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/ysfi" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://ysfi.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">很喜欢沉陷于错综复杂的代码与逻辑思考中，喜欢接触新鲜事物，喜爱健身，热爱旅行、爱交友。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Shao Feng</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Shao Feng</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">博客首页</a></li>
+                
+                    <li><a href="/">作品展示</a></li>
+                
+                    <li><a href="/">留言打卡</a></li>
+                
+                    <li><a href="/">前端导航</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=-czFyc-MyM3FzMW9jIzTnpKQ" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/ysfi" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-关于配置hexo问题" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/22/关于配置hexo问题/" class="article-date">
+      <time datetime="2015-03-22T09:11:20.000Z" itemprop="datePublished">2015-03-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Jacman基于Pacman修改的Hexo主题
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
+    </div>
+
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>由于Pacman已经暂停更新，加上Hexo已经升级为3.0，很多主题需要重新适配，而Jacman是基于Pacman修改而来，在前端设计样式和功能上做了很多合理的修改和完善，相信你也一定可以很快上手。</p>
+<blockquote>
+<p>Jacman是一款基于Pacman修改并坚持更新的Hexo主题。</p>
+</blockquote>
+<hr>
+<h2 id="更新历史"><a href="#更新历史" class="headerlink" title="更新历史"></a>更新历史</h2><p>2015年03月22日 - 初稿</p>
+<p>阅读原文 - Pacman为Hexo量身定制的响应式主题</p>
+<p>扩展阅读</p>
+<ul>
+<li>Jacman - wuchong/jacman · GitHub</li>
+<li>HelloDog Index - 索引 | Index</li>
+</ul>
+<hr>
+<h2 id="主题安装"><a href="#主题安装" class="headerlink" title="主题安装"></a>主题安装</h2><blockquote>
+<p>设置很简单，请参考原文中文说明</p>
+</blockquote>
+<h3 id="Jacman"><a href="#Jacman" class="headerlink" title="Jacman"></a>Jacman</h3><p>如何使用 Jacman 主题</p>
+<hr>
+<h2 id="配置yml"><a href="#配置yml" class="headerlink" title="配置yml"></a>配置yml</h2><blockquote>
+<p>这是我自己的真实配置文件，请参考原文注释做修改</p>
+</blockquote>
+<h3 id="全局yml"><a href="#全局yml" class="headerlink" title="全局yml"></a>全局yml</h3><p>``` md</p>
+<h1 id="Hexo-Configuration"><a href="#Hexo-Configuration" class="headerlink" title="Hexo Configuration"></a>Hexo Configuration</h1><h2 id="Docs-http-hexo-io-docs-configuration-html"><a href="#Docs-http-hexo-io-docs-configuration-html" class="headerlink" title="Docs: http://hexo.io/docs/configuration.html"></a>Docs: <a href="http://hexo.io/docs/configuration.html" target="_blank" rel="external">http://hexo.io/docs/configuration.html</a></h2><h2 id="Source-https-github-com-hexojs-hexo"><a href="#Source-https-github-com-hexojs-hexo" class="headerlink" title="Source: https://github.com/hexojs/hexo/"></a>Source: <a href="https://github.com/hexojs/hexo/" target="_blank" rel="external">https://github.com/hexojs/hexo/</a></h2><h1 id="Site"><a href="#Site" class="headerlink" title="Site"></a>Site</h1><p>title: HelloDog<br>subtitle: Keep Calm and Carry On<br>description: HelloDog是一个基于Github和Hexo的静态Blog，希望用简单而清晰的写作方式Markdown分享自己的心得体会。<br>author: wsgzao<br>language: zh-CN<br>timezone:</p>
+<h1 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h1><h2 id="If-your-site-is-put-in-a-subdirectory-set-url-as-‘http-yoursite-com-child‘-and-root-as-‘-child-‘"><a href="#If-your-site-is-put-in-a-subdirectory-set-url-as-‘http-yoursite-com-child‘-and-root-as-‘-child-‘" class="headerlink" title="If your site is put in a subdirectory, set url as ‘http://yoursite.com/child‘ and root as ‘/child/‘"></a>If your site is put in a subdirectory, set url as ‘<a href="http://yoursite.com/child">http://yoursite.com/child</a>‘ and root as ‘/child/‘</h2><p>url: <a href="http://wsgzao.github.io/" target="_blank" rel="external">http://wsgzao.github.io/</a><br>root: /<br>permalink: post/:title/<br>permalink_defaults:</p>
+<h1 id="Directory"><a href="#Directory" class="headerlink" title="Directory"></a>Directory</h1><p>source_dir: source<br>public_dir: public<br>tag_dir: tags<br>archive_dir: archives<br>category_dir: categories<br>code_dir: downloads/code<br>i18n_dir: :lang<br>skip_render:</p>
+<h1 id="Writing"><a href="#Writing" class="headerlink" title="Writing"></a>Writing</h1><p>new_post_name: :title.md # File name of new posts<br>default_layout: post<br>titlecase: false # Transform title into titlecase<br>external_link: true # Open external links in new tab<br>filename_case: 0<br>render_drafts: false<br>post_asset_folder: false<br>relative_link: false<br>future: true<br>highlight:<br>enable: true<br>line_number: true<br>tab_replace:</p>
+<h1 id="Category-amp-Tag"><a href="#Category-amp-Tag" class="headerlink" title="Category &amp; Tag"></a>Category &amp; Tag</h1><p>default_category: uncategorized<br>category_map:<br>tag_map:</p>
+<h1 id="Date-Time-format"><a href="#Date-Time-format" class="headerlink" title="Date / Time format"></a>Date / Time format</h1><h2 id="Hexo-uses-Moment-js-to-parse-and-display-date"><a href="#Hexo-uses-Moment-js-to-parse-and-display-date" class="headerlink" title="Hexo uses Moment.js to parse and display date"></a>Hexo uses Moment.js to parse and display date</h2><h2 id="You-can-customize-the-date-format-as-defined-in"><a href="#You-can-customize-the-date-format-as-defined-in" class="headerlink" title="You can customize the date format as defined in"></a>You can customize the date format as defined in</h2><h2 id="http-momentjs-com-docs-displaying-format"><a href="#http-momentjs-com-docs-displaying-format" class="headerlink" title="http://momentjs.com/docs/#/displaying/format/"></a><a href="http://momentjs.com/docs/#/displaying/format/" target="_blank" rel="external">http://momentjs.com/docs/#/displaying/format/</a></h2><p>date_format: YYYY-MM-DD<br>time_format: HH:mm:ss</p>
+<h1 id="Pagination"><a href="#Pagination" class="headerlink" title="Pagination"></a>Pagination</h1><h2 id="Set-per-page-to-0-to-disable-pagination"><a href="#Set-per-page-to-0-to-disable-pagination" class="headerlink" title="Set per_page to 0 to disable pagination"></a>Set per_page to 0 to disable pagination</h2><p>per_page: 10<br>pagination_dir: page</p>
+<h1 id="Extensions"><a href="#Extensions" class="headerlink" title="Extensions"></a>Extensions</h1><h2 id="Plugins-http-hexo-io-plugins"><a href="#Plugins-http-hexo-io-plugins" class="headerlink" title="Plugins: http://hexo.io/plugins/"></a>Plugins: <a href="http://hexo.io/plugins/" target="_blank" rel="external">http://hexo.io/plugins/</a></h2><h2 id="Themes-http-hexo-io-themes"><a href="#Themes-http-hexo-io-themes" class="headerlink" title="Themes: http://hexo.io/themes/"></a>Themes: <a href="http://hexo.io/themes/" target="_blank" rel="external">http://hexo.io/themes/</a></h2>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/03/22/关于配置hexo问题/">Jacman基于Pacman修改的Hexo主题</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Shao Feng 的个人博客">Shao Feng</a></p>
+        <p><span>发布时间:</span>2015年03月22日 - 17时11分</p>
+        <p><span>最后更新:</span>2016年10月13日 - 14时19分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/03/22/关于配置hexo问题/" title="Jacman基于Pacman修改的Hexo主题">http://yoursite.com/2015/03/22/关于配置hexo问题/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2015/03/22/关于配置hexo问题/　　作者: Shao Feng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新历史"><span class="toc-number">2.</span> <span class="toc-text">更新历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主题安装"><span class="toc-number">3.</span> <span class="toc-text">主题安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Jacman"><span class="toc-number">3.1.</span> <span class="toc-text">Jacman</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置yml"><span class="toc-number">4.</span> <span class="toc-text">配置yml</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#全局yml"><span class="toc-number">4.1.</span> <span class="toc-text">全局yml</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hexo-Configuration"><span class="toc-number"></span> <span class="toc-text">Hexo Configuration</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docs-http-hexo-io-docs-configuration-html"><span class="toc-number">1.</span> <span class="toc-text">Docs: http://hexo.io/docs/configuration.html</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Source-https-github-com-hexojs-hexo"><span class="toc-number">2.</span> <span class="toc-text">Source: https://github.com/hexojs/hexo/</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Site"><span class="toc-number"></span> <span class="toc-text">Site</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#URL"><span class="toc-number"></span> <span class="toc-text">URL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#If-your-site-is-put-in-a-subdirectory-set-url-as-‘http-yoursite-com-child‘-and-root-as-‘-child-‘"><span class="toc-number">1.</span> <span class="toc-text">If your site is put in a subdirectory, set url as ‘http://yoursite.com/child‘ and root as ‘/child/‘</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Directory"><span class="toc-number"></span> <span class="toc-text">Directory</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Writing"><span class="toc-number"></span> <span class="toc-text">Writing</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Category-amp-Tag"><span class="toc-number"></span> <span class="toc-text">Category & Tag</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Date-Time-format"><span class="toc-number"></span> <span class="toc-text">Date / Time format</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo-uses-Moment-js-to-parse-and-display-date"><span class="toc-number">1.</span> <span class="toc-text">Hexo uses Moment.js to parse and display date</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#You-can-customize-the-date-format-as-defined-in"><span class="toc-number">2.</span> <span class="toc-text">You can customize the date format as defined in</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http-momentjs-com-docs-displaying-format"><span class="toc-number">3.</span> <span class="toc-text">http://momentjs.com/docs/#/displaying/format/</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Pagination"><span class="toc-number"></span> <span class="toc-text">Pagination</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Set-per-page-to-0-to-disable-pagination"><span class="toc-number">1.</span> <span class="toc-text">Set per_page to 0 to disable pagination</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Extensions"><span class="toc-number"></span> <span class="toc-text">Extensions</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Plugins-http-hexo-io-plugins"><span class="toc-number">1.</span> <span class="toc-text">Plugins: http://hexo.io/plugins/</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Themes-http-hexo-io-themes"><span class="toc-number">2.</span> <span class="toc-text">Themes: http://hexo.io/themes/</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2015/03/22/关于配置hexo问题/" data-title="Jacman基于Pacman修改的Hexo主题" data-url="http://yoursite.com/2015/03/22/关于配置hexo问题/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"null"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2015/03/22/关于配置hexo问题/">Jacman基于Pacman修改的Hexo主题</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 Shao Feng
+            </div>
+            <div class="footer-right">
+                <a href="https://github.com/ysfi/ysfi.github.io">如果有想下次此模板的朋友，请点击此处。</a>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >该博客访问人数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读数量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
