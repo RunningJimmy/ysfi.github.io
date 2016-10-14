@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于闭包的问题 | 杨少峰个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="iframe上传、ajax上传、文件预览、拖放上传">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于闭包的问题">
+<meta property="og:url" content="http://yoursite.com/2015/04/14/文件上传的渐进式增强/index.html">
+<meta property="og:site_name" content="杨少峰个人博客">
+<meta property="og:description" content="iframe上传、ajax上传、文件预览、拖放上传">
+<meta property="og:updated_time" content="2016-10-14T03:50:50.987Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于闭包的问题">
+<meta name="twitter:description" content="iframe上传、ajax上传、文件预览、拖放上传">
+  
+    <link rel="alternative" href="/atom.xml" title="杨少峰个人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/icon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Shao Feng</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">博客首页</a></li>
+                        
+                            <li><a href="/">作品展示</a></li>
+                        
+                            <li><a href="/">留言打卡</a></li>
+                        
+                            <li><a href="/">前端导航</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=-czFyc-MyM3FzMW9jIzTnpKQ" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/ysfi" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://ysfi.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">很喜欢沉陷于错综复杂的代码与逻辑思考中，喜欢接触新鲜事物，喜爱健身，热爱旅行、爱交友。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Shao Feng</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Shao Feng</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">博客首页</a></li>
+                
+                    <li><a href="/">作品展示</a></li>
+                
+                    <li><a href="/">留言打卡</a></li>
+                
+                    <li><a href="/">前端导航</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=-czFyc-MyM3FzMW9jIzTnpKQ" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/ysfi" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-文件上传的渐进式增强" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/04/14/文件上传的渐进式增强/" class="article-date">
+      <time datetime="2015-04-14T05:28:59.000Z" itemprop="datePublished">2015-04-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      关于闭包的问题
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/文件上传/">文件上传</a>
+    </div>
+
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="作者：杨少峰"><a href="#作者：杨少峰" class="headerlink" title="作者：杨少峰"></a>作者：杨少峰</h2><p>文件上传是最古老的互联网操作之一。</p>
+<p>20多年了，它几乎没变，还是原来的样子：操作麻烦、缺乏交互、用户体验不佳。在这个新技术日新月异的时代，显得非常落伍。</p>
+<p>网页开发者们想了很多办法，试图提升文件上传的功能和操作体验，在各种Javascript库的基础上，开发了五花八门的插件。可是，由于不同浏览器之间的差异，缺乏统一接口，这些插件要么用起来很麻烦，要么不能普遍适用。</p>
+<p>HTML5提供了一系列新的浏览器API，使得文件上传有可能出现革命性变化。英国程序员Remy Sharp总结了这些新的接口，本文在他的文章基础上，讨论如何采用HTML5的API，对文件上传进行渐进式增强，实现以下功能：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">　　* iframe上传</div><div class="line"></div><div class="line">　　* ajax上传</div><div class="line"></div><div class="line">　　* 进度条</div><div class="line"></div><div class="line">　　* 文件预览</div><div class="line"></div><div class="line">　　* 拖放上传</div></pre></td></tr></table></figure>
+<p>为了对这些功能有一个感性认识，你可以先看看Remy Sharp提供的范例。</p>
+<p>虽然这些API，还没有得到广泛部署，但它们是未来的潮流。有了它们，代码就可以写得非常优雅简洁，上面五个功能都能在20行以内实现。</p>
+<hr>
+<h2 id="iframe上传"><a href="#iframe上传" class="headerlink" title="iframe上传"></a>iframe上传</h2><p>传统的表单上传，属于”同步上传”。也就是说，点击上传按钮后，网页”锁死”，用户只能等待上传结束，然后浏览器刷新，跳到表单的action属性指定的网址。</p>
+<p>有没有办法”异步上传”，在网页不重载的情况下，完成整个上传过程呢？</p>
+<p>在HTML5没有出现之前，只能使用iframe做到这一点。用户点击submit时，动态插入一个iframe元素（以下代码使用了jQuery函数库）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">　　<span class="keyword">var</span> form = $(<span class="string">"#upload-form"</span>);</div><div class="line"></div><div class="line">　　form.on(<span class="string">'submit'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">　　　　<span class="comment">// 此处动态插入iframe元素</span></div><div class="line"></div><div class="line">　　&#125;);</div></pre></td></tr></table></figure>
+<p>插入iframe的代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">　　<span class="keyword">var</span> seed = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">1000</span>);</div><div class="line"></div><div class="line">　　<span class="keyword">var</span> id = <span class="string">"uploader-frame-"</span> + seed;</div><div class="line"></div><div class="line">　　<span class="keyword">var</span> callback = <span class="string">"uploader-cb-"</span> + seed;</div><div class="line"></div><div class="line">　　<span class="keyword">var</span> iframe = $(<span class="string">'&lt;iframe id="'</span>+id+<span class="string">'" name="'</span>+id+<span class="string">'" style="display:none;"&gt;'</span>);</div><div class="line"></div><div class="line">　　<span class="keyword">var</span> url = form.attr(<span class="string">'action'</span>);</div><div class="line"></div><div class="line">　　form.attr(<span class="string">'target'</span>, id).append(iframe).attr(<span class="string">'action'</span>, url + <span class="string">'?iframe='</span> + callback);</div></pre></td></tr></table></figure>
+<p>最后一行，有两个地方值得注意。首先，它为表单添加target属性，指向动态插入的iframe窗口，这使得上传结束后，服务器将结果返回iframe窗口，所以当前页面就不会跳转了。其次，它在action属性指定的上传网址的后面，添加了一个参数，使得服务器知道回调函数的名称。这样就能将服务器返回的信息，从iframe窗口传到上层页面。</p>
+<p>服务器（upload.php）返回的信息，应该是如下形式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">　　&lt;script type=<span class="string">"text/javascript"</span>&gt;</div><div class="line"></div><div class="line">　　　　<span class="built_in">window</span>.top.window[<span class="string">'callback'</span>](data);</div><div class="line"></div><div class="line">　　&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>然后，在当前网页定义回调函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">　　<span class="built_in">window</span>[callback] = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line"></div><div class="line">　　　　<span class="built_in">console</span>.log(<span class="string">'received callback:'</span>, data);</div><div class="line"></div><div class="line">　　　　iframe.remove(); <span class="comment">//removing iframe</span></div><div class="line"></div><div class="line">　　　　form.removeAttr(<span class="string">'target'</span>);</div><div class="line"></div><div class="line">　　　　form.attr(<span class="string">'action'</span>, url);</div><div class="line"></div><div class="line">　　　　<span class="built_in">window</span>[callback] = <span class="literal">undefined</span>; <span class="comment">//removing callback</span></div><div class="line"></div><div class="line">　　&#125;;</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="ajax上传"><a href="#ajax上传" class="headerlink" title="ajax上传"></a>ajax上传</h2><p>HTML5提出了XMLHttpRequest对象的第二版，从此ajax能够上传文件了。这是真正的”异步上传”，是将来的主流。上一节的iframe上传，可以用作老式浏览器的替代方案。</p>
+<p>ajax上传代码，放在表单的submit事件回调函数中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">　　form.on(<span class="string">'submit'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">　　　　<span class="comment">// 此处进行ajax上传</span></div><div class="line"></div><div class="line">　　&#125;);</div></pre></td></tr></table></figure>
+<p>我们主要用的是FormData对象，它能够构建类似表单的键值对。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">　　<span class="comment">// 检查是否支持FormData</span></div><div class="line">　　<span class="keyword">if</span>(<span class="built_in">window</span>.FormData) &#123;　</div><div class="line"></div><div class="line">　　　　<span class="keyword">var</span> formData = <span class="keyword">new</span> FormData();</div><div class="line"></div><div class="line">　　　　<span class="comment">// 建立一个upload表单项，值为上传的文件</span></div><div class="line">　　　　formData.append(<span class="string">'upload'</span>, <span class="built_in">document</span>.getElementById(<span class="string">'upload'</span>).files[<span class="number">0</span>]);</div><div class="line"></div><div class="line">　　　　<span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line"></div><div class="line">　　　　xhr.open(<span class="string">'POST'</span>, $(<span class="keyword">this</span>).attr(<span class="string">'action'</span>));</div><div class="line"></div><div class="line">　　　　<span class="comment">// 定义上传完成后的回调函数</span></div><div class="line">　　　　xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">　　　　　　<span class="keyword">if</span> (xhr.status === <span class="number">200</span>) &#123;</div><div class="line"></div><div class="line">　　　　　　　　<span class="built_in">console</span>.log(<span class="string">'上传成功'</span>);</div><div class="line"></div><div class="line">　　　　　　&#125; <span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">　　　　　　　　<span class="built_in">console</span>.log(<span class="string">'出错了'</span>);</div><div class="line"></div><div class="line">　　　　　　&#125;</div><div class="line"></div><div class="line">　　　　&#125;;</div><div class="line"></div><div class="line">　　　　xhr.send(formData);</div><div class="line"></div><div class="line">　　&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="拖放上传"><a href="#拖放上传" class="headerlink" title="拖放上传"></a>拖放上传</h2><p>最后，利用HTML5的拖放功能，实现拖放上传。<br>先在页面中放置一个容器，用来接收拖放的文件。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">　　<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"holder"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>对它设置样式：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">　　<span class="selector-id">#holder</span> &#123;</div><div class="line">　　　　<span class="attribute">border</span>: <span class="number">10px</span> dashed <span class="number">#ccc</span>;</div><div class="line">　　　　<span class="attribute">width</span>: <span class="number">300px</span>;</div><div class="line">　　　　<span class="attribute">min-height</span>: <span class="number">300px</span>;</div><div class="line">　　　　<span class="attribute">margin</span>: <span class="number">20px</span> auto;</div><div class="line">　　&#125;</div><div class="line"></div><div class="line">　　<span class="selector-id">#holder</span><span class="selector-class">.hover</span> &#123;</div><div class="line">　　　　<span class="attribute">border</span>: <span class="number">10px</span> dashed <span class="number">#0c0</span>;</div><div class="line">　　&#125;</div></pre></td></tr></table></figure>
+<p>拖放文件的代码，主要是定义dragover、dragend和drop这三个事件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">　　<span class="comment">// 检查浏览器是否支持拖放上传。</span></div><div class="line">　　<span class="keyword">if</span>(<span class="string">'draggable'</span> <span class="keyword">in</span> <span class="built_in">document</span>.createElement(<span class="string">'span'</span>))&#123;</div><div class="line"></div><div class="line">　　　　<span class="keyword">var</span> holder = <span class="built_in">document</span>.getElementById(<span class="string">'holder'</span>);</div><div class="line"></div><div class="line">　　　　holder.ondragover = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">this</span>.className = <span class="string">'hover'</span>; <span class="keyword">return</span> <span class="literal">false</span>; &#125;;</div><div class="line"></div><div class="line">　　　　holder.ondragend = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">this</span>.className = <span class="string">''</span>; <span class="keyword">return</span> <span class="literal">false</span>; &#125;;</div><div class="line"></div><div class="line">　　　　holder.ondrop = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</div><div class="line"></div><div class="line">　　　　　　event.preventDefault();</div><div class="line"></div><div class="line">　　　　　　<span class="keyword">this</span>.className = <span class="string">''</span>;</div><div class="line"></div><div class="line">　　　　　　<span class="keyword">var</span> files = event.dataTransfer.files;</div><div class="line"></div><div class="line">　　　　　　<span class="comment">// do something with files</span></div><div class="line"></div><div class="line">　　　　&#125;;</div><div class="line"></div><div class="line">　　&#125;</div></pre></td></tr></table></figure>
+<p>完成后的效果和总体代码，请看拖放上传demo。</p>
+<p>(完)</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/04/14/文件上传的渐进式增强/">关于闭包的问题</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Shao Feng 的个人博客">Shao Feng</a></p>
+        <p><span>发布时间:</span>2015年04月14日 - 13时28分</p>
+        <p><span>最后更新:</span>2016年10月14日 - 11时50分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/04/14/文件上传的渐进式增强/" title="关于闭包的问题">http://yoursite.com/2015/04/14/文件上传的渐进式增强/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2015/04/14/文件上传的渐进式增强/　　作者: Shao Feng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2015/03/22/关于配置hexo问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Jacman基于Pacman修改的Hexo主题</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#作者：杨少峰"><span class="toc-number">1.</span> <span class="toc-text">作者：杨少峰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#iframe上传"><span class="toc-number">2.</span> <span class="toc-text">iframe上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ajax上传"><span class="toc-number">3.</span> <span class="toc-text">ajax上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拖放上传"><span class="toc-number">4.</span> <span class="toc-text">拖放上传</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2015/04/14/文件上传的渐进式增强/" data-title="关于闭包的问题" data-url="http://yoursite.com/2015/04/14/文件上传的渐进式增强/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"null"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2015/03/22/关于配置hexo问题/" title="下一篇: Jacman基于Pacman修改的Hexo主题">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2015/04/14/文件上传的渐进式增强/">关于闭包的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/22/关于配置hexo问题/">Jacman基于Pacman修改的Hexo主题</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/14/关于闭包的问题/">关于闭包的问题</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 Shao Feng
+            </div>
+            <div class="footer-right">
+                <a href="https://github.com/ysfi/ysfi.github.io">如果有想下次此模板的朋友，请点击此处。</a>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >该博客访问人数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读数量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
