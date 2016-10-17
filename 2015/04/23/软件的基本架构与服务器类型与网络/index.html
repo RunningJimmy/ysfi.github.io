@@ -3,14 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2015/4 | 杨少峰个人博客</title>
+  <title>软件、服务器、网络 | 杨少峰个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="杨少峰个人博客">
-<meta property="og:url" content="http://yoursite.com/archives/2015/04/index.html">
+  <meta name="description" content="主要是分享一下自己的笔记，有关于软件的基本架构与服务期类型以及网络的一些知识。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件、服务器、网络">
+<meta property="og:url" content="http://yoursite.com/2015/04/23/软件的基本架构与服务器类型与网络/index.html">
 <meta property="og:site_name" content="杨少峰个人博客">
+<meta property="og:description" content="主要是分享一下自己的笔记，有关于软件的基本架构与服务期类型以及网络的一些知识。">
+<meta property="og:updated_time" content="2016-10-17T09:20:27.872Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="杨少峰个人博客">
+<meta name="twitter:title" content="软件、服务器、网络">
+<meta name="twitter:description" content="主要是分享一下自己的笔记，有关于软件的基本架构与服务期类型以及网络的一些知识。">
   
     <link rel="alternative" href="/atom.xml" title="杨少峰个人博客" type="application/atom+xml">
   
@@ -36,8 +40,8 @@
           fancybox: true,
           animate: true,
           isHome: false,
-          isPost: false,
-          isArchive: true,
+          isPost: true,
+          isArchive: false,
           isTag: false,
           isCategory: false,
           open_in_new: false
@@ -224,85 +228,231 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-软件的基本架构与服务器类型与网络" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2015/04/23/软件的基本架构与服务器类型与网络/" class="archive-article-date">
-      <time datetime="2015-04-23T12:04:59.000Z" itemprop="datePublished">04-23</time>
+    <div class="article-meta">
+      <a href="/2015/04/23/软件的基本架构与服务器类型与网络/" class="article-date">
+      <time datetime="2015-04-23T12:04:59.000Z" itemprop="datePublished">2015-04-23</time>
 </a>
-        </div>
-         
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/04/23/软件的基本架构与服务器类型与网络/">软件、服务器、网络</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      软件、服务器、网络
     </h1>
   
 
-        <div class="article-info info-on-archive">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
     <div class="article-category tagcloud">
     <a class="article-category-link" href="/categories/软件的基本架构、服务器类型、IP地址、端口、域名、/">软件的基本架构、服务器类型、IP地址、端口、域名、</a>
     </div>
 
 
-          
-        </div>
+        
         <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+      </div>
+      
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2015/04/14/文件上传的渐进式增强/" class="archive-article-date">
-      <time datetime="2015-04-14T05:28:59.000Z" itemprop="datePublished">04-14</time>
-</a>
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/04/14/文件上传的渐进式增强/">文件上传的渐进式增强</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
+    <div class="article-entry" itemprop="articleBody">
+      
           
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/文件上传/">文件上传</a>
+        <h2 id="作者：杨少峰"><a href="#作者：杨少峰" class="headerlink" title="作者：杨少峰"></a>作者：杨少峰</h2><hr>
+<h2 id="一、软件的基本架构"><a href="#一、软件的基本架构" class="headerlink" title="一、软件的基本架构"></a>一、软件的基本架构</h2><p>1：CS架构 (client:客户端 server:服务器)<br>2: BS架构 (Browser:浏览器 server:服务器)</p>
+<ul>
+<li>两者的区别：<ul>
+<li>1.cs架构都需要有一个安装包，更新的时候需要去官网下一个安装包。</li>
+<li>2.性能比较好，一般游戏都采用CS架构。</li>
+<li>3.cs架构升级比较麻烦，不方便维护。</li>
+</ul>
+</li>
+<li>客户端：<ul>
+<li>1.具有向服务器索取服务能力的终端叫做客户端，以浏览器为宿主环境，结合HTML和CSS与JS等技术进行开发，就叫前端开发。</li>
+</ul>
+</li>
+<li>服务端：<ul>
+<li>1.接受客户端的请求。</li>
+<li>2.对客户端的请求进行处理。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="二、服务器类型："><a href="#二、服务器类型：" class="headerlink" title="二、服务器类型："></a>二、服务器类型：</h2><pre><code>- 2.1：服务类型
+    * 1：文件服务器
+    * 2：数据库服务器
+    * 3：邮件服务器
+    * 4：web服务器
+- 2.2：操作系统
+    * windows
+    * Linux
+    * MAC
+- 2.3：应用软件
+    * 由这个软件对外提供服务：Apache这是一个web服务器。
+</code></pre>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/04/23/软件的基本架构与服务器类型与网络/">软件、服务器、网络</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Shao Feng 的个人博客">Shao Feng</a></p>
+        <p><span>发布时间:</span>2015年04月23日 - 20时04分</p>
+        <p><span>最后更新:</span>2016年10月17日 - 17时20分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/04/23/软件的基本架构与服务器类型与网络/" title="软件、服务器、网络">http://yoursite.com/2015/04/23/软件的基本架构与服务器类型与网络/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2015/04/23/软件的基本架构与服务器类型与网络/　　作者: Shao Feng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
     </div>
 
 
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
+
+<nav id="article-nav">
+  
+    <a href="/2015/11/17/移动H5自适应布局/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          移动H5自适应布局
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/04/14/文件上传的渐进式增强/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">文件上传的渐进式增强</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#作者：杨少峰"><span class="toc-number">1.</span> <span class="toc-text">作者：杨少峰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、软件的基本架构"><span class="toc-number">2.</span> <span class="toc-text">一、软件的基本架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、服务器类型："><span class="toc-number">3.</span> <span class="toc-text">二、服务器类型：</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2015/04/23/软件的基本架构与服务器类型与网络/" data-title="软件、服务器、网络" data-url="http://yoursite.com/2015/04/23/软件的基本架构与服务器类型与网络/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"null"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
 
     
 
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/11/17/移动H5自适应布局/" title="上一篇: 移动H5自适应布局">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2015/04/14/文件上传的渐进式增强/" title="下一篇: 文件上传的渐进式增强">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/17/c/">c</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/17/b/">b</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/17/a/">a</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/14/Javascript模块的循环加载/">JavaScript 模块的循环加载</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/23/浅谈jsonp/">浅谈jsonp</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/17/移动H5自适应布局/">移动H5自适应布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/04/23/软件的基本架构与服务器类型与网络/">软件、服务器、网络</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/04/14/文件上传的渐进式增强/">文件上传的渐进式增强</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/22/关于配置hexo问题/">Jacman基于Pacman修改的Hexo主题</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/14/关于闭包的问题/">关于闭包的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/02/14/HTTP协议入门/">HTTP协议入门</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
@@ -367,17 +517,6 @@
         };
     })
 </script>
-
-    <button class="hide-labels">TAG 开关</button>
-    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js">
-    </script>
-    <script>
-        $(document).ready(function() {
-            $("button").click(function() {
-                $(".article-info").toggle(200);
-            });
-        });
-    </script>
 
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
