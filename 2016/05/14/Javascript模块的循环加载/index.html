@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>关于闭包的问题 | 杨少峰个人博客</title>
+  <title>JavaScript 模块的循环加载 | 杨少峰个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人对于js闭包的一些理解，以及运行环境相关的问题。">
+  <meta name="description" content="个人对于模块的理解">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于闭包的问题">
-<meta property="og:url" content="http://yoursite.com/2015/03/14/关于闭包的问题/index.html">
+<meta property="og:title" content="JavaScript 模块的循环加载">
+<meta property="og:url" content="http://yoursite.com/2016/05/14/Javascript模块的循环加载/index.html">
 <meta property="og:site_name" content="杨少峰个人博客">
-<meta property="og:description" content="个人对于js闭包的一些理解，以及运行环境相关的问题。">
-<meta property="og:updated_time" content="2016-10-14T03:39:39.254Z">
+<meta property="og:description" content="个人对于模块的理解">
+<meta property="og:updated_time" content="2016-10-17T08:55:14.161Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于闭包的问题">
-<meta name="twitter:description" content="个人对于js闭包的一些理解，以及运行环境相关的问题。">
+<meta name="twitter:title" content="JavaScript 模块的循环加载">
+<meta name="twitter:description" content="个人对于模块的理解">
   
     <link rel="alternative" href="/atom.xml" title="杨少峰个人博客" type="application/atom+xml">
   
@@ -228,11 +228,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-关于闭包的问题" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Javascript模块的循环加载" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/03/14/关于闭包的问题/" class="article-date">
-      <time datetime="2015-03-14T03:28:59.000Z" itemprop="datePublished">2015-03-14</time>
+      <a href="/2016/05/14/Javascript模块的循环加载/" class="article-date">
+      <time datetime="2016-05-14T07:04:20.000Z" itemprop="datePublished">2016-05-14</time>
 </a>
     </div>
   
@@ -245,7 +245,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      关于闭包的问题
+      JavaScript 模块的循环加载
     </h1>
   
 
@@ -254,7 +254,7 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/闭包/">闭包</a>
+    <a class="article-category-link" href="/categories/模块化/">模块化</a>
     </div>
 
 
@@ -266,36 +266,34 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="作者：杨少峰"><a href="#作者：杨少峰" class="headerlink" title="作者：杨少峰"></a>作者：杨少峰</h2><p>闭包（closure）是Javascript语言的一个难点，也是它的特色，很多高级应用都要依靠闭包实现。下面就是我的学习笔记，对于Javascript初学者应该是很有用的。</p>
+        <h2 id="作者：杨少峰"><a href="#作者：杨少峰" class="headerlink" title="作者：杨少峰"></a>作者：杨少峰</h2><p>“循环加载”（circular dependency）指的是，a脚本的执行依赖b脚本，而b脚本的执行又依赖a脚本。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// a.js</span></div><div class="line"><span class="keyword">var</span> b = <span class="built_in">require</span>(<span class="string">'b'</span>);</div><div class="line"></div><div class="line"><span class="comment">// b.js</span></div><div class="line"><span class="keyword">var</span> a = <span class="built_in">require</span>(<span class="string">'a'</span>);</div></pre></td></tr></table></figure>
+<p>通常，”循环加载”表示存在强耦合，如果处理不好，还可能导致递归加载，使得程序无法执行，因此应该避免出现。</p>
+<p>但是实际上，这是很难避免的，尤其是依赖关系复杂的大项目，很容易出现a依赖b，b依赖c，c又依赖a这样的情况。这意味着，模块加载机制必须考虑”循环加载”的情况。</p>
+<p>本文介绍JavaScript语言如何处理”循环加载”。目前，最常见的两种模块格式CommonJS和ES6，处理方法是不一样的，返回的结果也不一样。</p>
 <hr>
-<h2 id="变量的作用域"><a href="#变量的作用域" class="headerlink" title="变量的作用域"></a>变量的作用域</h2><p>要理解闭包，首先必须理解Javascript特殊的变量作用域。</p>
-<p>变量的作用域无非就是两种：全局变量和局部变量。</p>
-<p>Javascript语言的特殊之处，就在于函数内部可以直接读取全局变量。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">　　<span class="keyword">var</span> n=<span class="number">999</span>;</div><div class="line"></div><div class="line">　　<span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">　　　　alert(n);</div><div class="line"></div><div class="line">　　&#125;</div><div class="line"></div><div class="line">　　f1(); <span class="comment">// 999</span></div></pre></td></tr></table></figure>
-<p>另一方面，在函数外部自然无法读取函数内的局部变量。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">　　<span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">　　　　<span class="keyword">var</span> n=<span class="number">999</span>;</div><div class="line"></div><div class="line">　　&#125;</div><div class="line"></div><div class="line">　　alert(n); <span class="comment">// error</span></div></pre></td></tr></table></figure>
-<p>这里有一个地方需要注意，函数内部声明变量的时候，一定要使用var命令。如果不用的话，你实际上声明了一个全局变量！</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">　　<span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">　　　　n=<span class="number">999</span>;</div><div class="line"></div><div class="line">　　&#125;</div><div class="line"></div><div class="line">　　f1();</div><div class="line"></div><div class="line">　　alert(n); <span class="comment">// 999</span></div></pre></td></tr></table></figure>
+<h2 id="一、CommonJS模块的加载原理"><a href="#一、CommonJS模块的加载原理" class="headerlink" title="一、CommonJS模块的加载原理"></a>一、CommonJS模块的加载原理</h2><p>介绍ES6如何处理”循环加载”之前，先介绍目前最流行的CommonJS模块格式的加载原理。</p>
+<p>CommonJS的一个模块，就是一个脚本文件。require命令第一次加载该脚本，就会执行整个脚本，然后在内存生成一个对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&#123;</div><div class="line">  <span class="attr">id</span>: <span class="string">'...'</span>,</div><div class="line">  <span class="attr">exports</span>: &#123; ... &#125;,</div><div class="line">  <span class="attr">loaded</span>: <span class="literal">true</span>,</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面代码中，该对象的id属性是模块名，exports属性是模块输出的各个接口，loaded属性是一个布尔值，表示该模块的脚本是否执行完毕。其他还有很多属性，这里都省略了。</p>
+<p>以后需要用到这个模块的时候，就会到exports属性上面取值。即使再次执行require命令，也不会再次执行该模块，而是到缓存之中取值。</p>
 <hr>
-<h2 id="如何从外部读取局部变量？"><a href="#如何从外部读取局部变量？" class="headerlink" title="如何从外部读取局部变量？"></a>如何从外部读取局部变量？</h2><p>出于种种原因，我们有时候需要得到函数内的局部变量。但是，前面已经说过了，正常情况下，这是办不到的，只有通过变通方法才能实现。</p>
-<p>那就是在函数的内部，再定义一个函数。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">　　<span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">　　　　<span class="keyword">var</span> n=<span class="number">999</span>;</div><div class="line"></div><div class="line">　　　　<span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">　　　　　　alert(n); <span class="comment">// 999</span></div><div class="line"></div><div class="line">　　　　&#125;</div><div class="line"></div><div class="line">　　&#125;</div></pre></td></tr></table></figure>
-<p>在上面的代码中，函数f2就被包括在函数f1内部，这时f1内部的所有局部变量，对f2都是可见的。但是反过来就不行，f2内部的局部变量，对f1就是不可见的。这就是Javascript语言特有的”链式作用域”结构（chain scope），子对象会一级一级地向上寻找所有父对象的变量。所以，父对象的所有变量，对子对象都是可见的，反之则不成立。</p>
-<p>既然f2可以读取f1中的局部变量，那么只要把f2作为返回值，我们不就可以在f1外部读取它的内部变量了吗！</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">　　<span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">　　　　<span class="keyword">var</span> n=<span class="number">999</span>;</div><div class="line"></div><div class="line">　　　　<span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">　　　　　　alert(n); </div><div class="line"></div><div class="line">　　　　&#125;</div><div class="line"></div><div class="line">　　　　<span class="keyword">return</span> f2;</div><div class="line"></div><div class="line">　　&#125;</div><div class="line"></div><div class="line">　　<span class="keyword">var</span> result=f1();</div><div class="line"></div><div class="line">　　result(); <span class="comment">// 999</span></div></pre></td></tr></table></figure>
-<hr>
-<h2 id="闭包的概念"><a href="#闭包的概念" class="headerlink" title="闭包的概念"></a>闭包的概念</h2><p>上一节代码中的f2函数，就是闭包。</p>
-<p>各种专业文献上的”闭包”（closure）定义非常抽象，很难看懂。我的理解是，闭包就是能够读取其他函数内部变量的函数。</p>
-<p>由于在Javascript语言中，只有函数内部的子函数才能读取局部变量，因此可以把闭包简单理解成”定义在一个函数内部的函数”。</p>
-<p>所以，在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。</p>
-<hr>
-<h2 id="闭包的用途"><a href="#闭包的用途" class="headerlink" title="闭包的用途"></a>闭包的用途</h2><p>闭包可以用在许多地方。它的最大用处有两个，一个是前面提到的可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中。</p>
-<p>怎么来理解这句话呢？请看下面的代码。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">　　<span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">　　　　<span class="keyword">var</span> n=<span class="number">999</span>;</div><div class="line"></div><div class="line">　　　　nAdd=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;n+=<span class="number">1</span>&#125;</div><div class="line"></div><div class="line">　　　　<span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">　　　　　　alert(n);</div><div class="line"></div><div class="line">　　　　&#125;</div><div class="line"></div><div class="line">　　　　<span class="keyword">return</span> f2;</div><div class="line"></div><div class="line">　　&#125;</div><div class="line"></div><div class="line">　　<span class="keyword">var</span> result=f1();</div><div class="line"></div><div class="line">　　result(); <span class="comment">// 999</span></div><div class="line"></div><div class="line">　　nAdd();</div><div class="line"></div><div class="line">　　result(); <span class="comment">// 1000</span></div></pre></td></tr></table></figure>
-<p>在这段代码中，result实际上就是闭包f2函数。它一共运行了两次，第一次的值是999，第二次的值是1000。这证明了，函数f1中的局部变量n一直保存在内存中，并没有在f1调用后被自动清除。</p>
-<p>为什么会这样呢？原因就在于f1是f2的父函数，而f2被赋给了一个全局变量，这导致f2始终在内存中，而f2的存在依赖于f1，因此f1也始终在内存中，不会在调用结束后，被垃圾回收机制（garbage collection）回收。</p>
-<p>这段代码中另一个值得注意的地方，就是”nAdd=function(){n+=1}”这一行，首先在nAdd前面没有使用var关键字，因此nAdd是一个全局变量，而不是局部变量。其次，nAdd的值是一个匿名函数（anonymous function），而这个匿名函数本身也是一个闭包，所以nAdd相当于是一个setter，可以在函数外部对函数内部的局部变量进行操作。</p>
-
+<h2 id="二、CommonJS模块的循环加载"><a href="#二、CommonJS模块的循环加载" class="headerlink" title="二、CommonJS模块的循环加载"></a>二、CommonJS模块的循环加载</h2><p>CommonJS模块的重要特性是加载时执行，即脚本代码在require的时候，就会全部执行。CommonJS的做法是，一旦出现某个模块被”循环加载”，就只输出已经执行的部分，还未执行的部分不会输出。</p>
+<p>让我们来看，官方文档里面的例子。脚本文件a.js代码如下。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">exports.done = <span class="literal">false</span>;</div><div class="line"><span class="keyword">var</span> b = <span class="built_in">require</span>(<span class="string">'./b.js'</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'在 a.js 之中，b.done = %j'</span>, b.done);</div><div class="line">exports.done = <span class="literal">true</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'a.js 执行完毕'</span>)</div><div class="line"></div><div class="line"><span class="string">`</span></div></pre></td></tr></table></figure>
+<p>上面代码之中，a.js脚本先输出一个done变量，然后加载另一个脚本文件b.js。注意，此时a.js代码就停在这里，等待b.js执行完毕，再往下执行。</p>
+<p>再看b.js的代码。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">exports.done = <span class="literal">false</span>;</div><div class="line"><span class="keyword">var</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'在 b.js 之中，a.done = %j'</span>, a.done);</div><div class="line">exports.done = <span class="literal">true</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'b.js 执行完毕'</span>);</div></pre></td></tr></table></figure>
+<p>上面代码之中，b.js执行到第二行，就会去加载a.js，这时，就发生了”循环加载”。系统会去a.js模块对应对象的exports属性取值，可是因为a.js还没有执行完，从exports属性只能取回已经执行的部分，而不是最后的值。</p>
+<p>a.js已经执行的部分，只有一行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">exports.done = <span class="literal">false</span>;</div></pre></td></tr></table></figure>
+<p>因此，对于b.js来说，它从a.js只输入一个变量done，值为false。</p>
+<p>然后，b.js接着往下执行，等到全部执行完毕，再把执行权交还给a.js。于是，a.js接着往下执行，直到执行完毕。我们写一个脚本main.js，验证这个过程。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>);</div><div class="line"><span class="keyword">var</span> b = <span class="built_in">require</span>(<span class="string">'./b.js'</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'在 main.js 之中, a.done=%j, b.done=%j'</span>, a.done, b.done);</div></pre></td></tr></table></figure>
+<p>执行main.js，运行结果如下。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">$ node main.js</div><div class="line"></div><div class="line">在 b.js 之中，a.done = <span class="literal">false</span></div><div class="line">b.js 执行完毕</div><div class="line">在 a.js 之中，b.done = <span class="literal">true</span></div><div class="line">a.js 执行完毕</div><div class="line">在 main.js 之中, a.done=<span class="literal">true</span>, b.done=<span class="literal">true</span></div></pre></td></tr></table></figure>
+<p>上面的代码证明了两件事。一是，在b.js之中，a.js没有执行完毕，只执行了第一行。二是，main.js执行到第二行时，不会再次执行b.js，而是输出缓存的b.js的执行结果，即它的第四行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">exports.done = <span class="literal">true</span>;</div></pre></td></tr></table></figure>
       
     </div>
     
@@ -303,13 +301,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2015/03/14/关于闭包的问题/">关于闭包的问题</a></p>
+        <p><span>本文标题:</span><a href="/2016/05/14/Javascript模块的循环加载/">JavaScript 模块的循环加载</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Shao Feng 的个人博客">Shao Feng</a></p>
-        <p><span>发布时间:</span>2015年03月14日 - 11时28分</p>
-        <p><span>最后更新:</span>2016年10月14日 - 11时39分</p>
+        <p><span>发布时间:</span>2016年05月14日 - 15时04分</p>
+        <p><span>最后更新:</span>2016年10月17日 - 16时55分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2015/03/14/关于闭包的问题/" title="关于闭包的问题">http://yoursite.com/2015/03/14/关于闭包的问题/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2015/03/14/关于闭包的问题/　　作者: Shao Feng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/05/14/Javascript模块的循环加载/" title="JavaScript 模块的循环加载">http://yoursite.com/2016/05/14/Javascript模块的循环加载/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2016/05/14/Javascript模块的循环加载/　　作者: Shao Feng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -322,18 +320,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2015/03/22/关于配置hexo问题/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Jacman基于Pacman修改的Hexo主题
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/02/14/HTTP协议入门/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">HTTP协议入门</div>
+    <a href="/2016/04/23/浅谈jsonp/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">浅谈jsonp</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -344,7 +333,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#作者：杨少峰"><span class="toc-number">1.</span> <span class="toc-text">作者：杨少峰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量的作用域"><span class="toc-number">2.</span> <span class="toc-text">变量的作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何从外部读取局部变量？"><span class="toc-number">3.</span> <span class="toc-text">如何从外部读取局部变量？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包的概念"><span class="toc-number">4.</span> <span class="toc-text">闭包的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包的用途"><span class="toc-number">5.</span> <span class="toc-text">闭包的用途</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#作者：杨少峰"><span class="toc-number">1.</span> <span class="toc-text">作者：杨少峰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、CommonJS模块的加载原理"><span class="toc-number">2.</span> <span class="toc-text">一、CommonJS模块的加载原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、CommonJS模块的循环加载"><span class="toc-number">3.</span> <span class="toc-text">二、CommonJS模块的循环加载</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -392,7 +381,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2015/03/14/关于闭包的问题/" data-title="关于闭包的问题" data-url="http://yoursite.com/2015/03/14/关于闭包的问题/"></div>
+    <div class="ds-thread" data-thread-key="2016/05/14/Javascript模块的循环加载/" data-title="JavaScript 模块的循环加载" data-url="http://yoursite.com/2016/05/14/Javascript模块的循环加载/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -415,13 +404,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2015/03/22/关于配置hexo问题/" title="上一篇: Jacman基于Pacman修改的Hexo主题">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2015/02/14/HTTP协议入门/" title="下一篇: HTTP协议入门">
+            <a href="/2016/04/23/浅谈jsonp/" title="下一篇: 浅谈jsonp">
                 <i class="fa fa-angle-right"></i>
             </a>
         
