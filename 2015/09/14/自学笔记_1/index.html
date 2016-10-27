@@ -15,7 +15,7 @@ Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js �
 <meta property="og:description" content="windows命令行的命令cd:切换目录cls:清屏dir:显示目录结构mkdir:创建文件夹rd:删除文件夹del:删除指定文件ren:改变文件名ipconfig:找自身ip
 Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效。
 可以用Node.js干什么    Websocket">
-<meta property="og:updated_time" content="2016-10-27T16:00:20.897Z">
+<meta property="og:updated_time" content="2016-10-27T16:03:21.347Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自学笔记_1">
 <meta name="twitter:description" content="windows命令行的命令cd:切换目录cls:清屏dir:显示目录结构mkdir:创建文件夹rd:删除文件夹del:删除指定文件ren:改变文件名ipconfig:找自身ip
@@ -273,6 +273,7 @@ Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js �
 <p>可以用Node.js干什么<br>    Websocket Server：聊天室之类<br>    Fast File Upload Client：文件上传服务<br>    Ad Server：广告服务器<br>    实时数据相关的应用，类似1</p>
 <p>事件驱动模型</p>
 <p>非阻塞式 I/O 的模型</p>
+<hr>
 <h2 id="Node-js的作用"><a href="#Node-js的作用" class="headerlink" title="Node.js的作用"></a>Node.js的作用</h2><ul>
 <li><p>可以用Node.js干什么？</p>
 </li>
@@ -287,6 +288,7 @@ Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js �
 <li><p>node.js是事件驱动的，适合高IO的场景，如果你有大量的计算那还是要选择其他的语言，但是大多数的web应用或服务都是简单的增删改查，只有少量的逻辑计算，这是node.js最擅长处理的场景，因为当处理进入io之后空闲下来的CPU会继续做下一个请求的处理，并不会等待io完成，而是当io完成后再回来继续处理下面的逻辑，这样就大大节省了CPU的空耗事件。另外单进程的node.js跟那些N多个进程的东西比肯定是node.js更节省资源。</p>
 </li>
 </ul>
+<hr>
 <h2 id="关于理解并发"><a href="#关于理解并发" class="headerlink" title="关于理解并发"></a>关于理解并发</h2><ul>
 <li>并发这个术语描述的是事情会在同时发生并可能互相交互</li>
 </ul>
@@ -294,20 +296,25 @@ Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js �
 <p>Node的并发、进程、单线程、</p>
 <p>目前理解并发只需要知道：它指的是许多人同时尝试做同样的事情；</p>
 <p>系统=&gt;进程=&gt;线程</p>
+<hr>
 <h2 id="同步与异步"><a href="#同步与异步" class="headerlink" title="同步与异步"></a>同步与异步</h2><p>同步会阻塞异步代码</p>
 <p>同步有循序关系，异步则没有</p>
+<hr>
 <h2 id="剖析回调"><a href="#剖析回调" class="headerlink" title="剖析回调"></a>剖析回调</h2><p>掌握的关键概念是：函数可以作为参数传递到另一个函数中，然后被调用，但是必须传入的是函数</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">hava</span>(<span class="params">callback</span>)</span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">if</span>(callback &amp;&amp; <span class="keyword">typeof</span>(callbakc)==<span class="string">'function'</span>)&#123;</div><div class="line"></div><div class="line">		callback();</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>Node.js 在还有已经注册的回调尚未触发之前将不会退出。回调首先是负责解决不可预测性的方法，它也是处理并发（或者说一次做一件事情）的高效方法。</p>
 <p>Node.js 运行在单一的进程中并且要求开发人员使用异步的编码风格</p>
 <p>同步的代码意味着每一次执行一个操作，在一个操作完成之前，代码的执行会被阻塞，无法移到下一个操作上</p>
 <p>Node.js 对如何在网络和I/O操作中处理并发(或者一次做超过一件事情)有自己的做法,所推崇的是异步的方式</p>
+<hr>
 <h2 id="关于阻塞和非阻塞，异步与同步"><a href="#关于阻塞和非阻塞，异步与同步" class="headerlink" title="关于阻塞和非阻塞，异步与同步"></a>关于阻塞和非阻塞，异步与同步</h2><p>同步和阻塞这两个术语也可互换使用，指的是基于回调的、允许脚本并行执行操作的方法，脚本无需等待某个操作的结果才能继续前进，因为操作结果会在事件发生时由回调来处理。使用异步方法，操作无需一个接一个发生。</p>
+<hr>
 <h2 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h2><h2 id="在使用回调函数可能遇到的问题"><a href="#在使用回调函数可能遇到的问题" class="headerlink" title="在使用回调函数可能遇到的问题"></a>在使用回调函数可能遇到的问题</h2><p>在使用回调时可能会碰到与控制流有关的问题。在这里需要指定回调的执行顺序，还有可能发现回调的嵌套深<br>度会多达四层到五层。但是随着Node.js的经验增长，将会碰到深度嵌套的回调和控制流的问题。</p>
 <p>关于不理解的：  1、进程。 2、单线程。3、I/O模型。4、异步I/O。 5、并发。</p>
 <p>单线程：</p>
 <p>线程是用来运行应用程序中代码的，一个线程在一个时间只能做一件事情，多线程编写起来很麻烦，node是单线程执行，用异步替代了多线程</p>
 <p>异步非I/O操作和异步I/O操作：<br>异步非io setTimeout setInterval<br>异步IO操作 操作文件 网络操作 fs</p>
+<hr>
 <h2 id="Node调试-node内置调试器"><a href="#Node调试-node内置调试器" class="headerlink" title="Node调试 -node内置调试器"></a>Node调试 -node内置调试器</h2><p>启动调试：node debug 文件名</p>
 <p>-n(下一步)  s(步入)函数  o(步出)</p>
 <p>内聚</p>
@@ -389,6 +396,7 @@ Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js �
 <p>req.httpVersion</p>
 <p>CDN：内容分发，东西离你最近，<br>CDN优化：按照一定是索引逻辑找到离你最快的节点，让你得到这个页面速度更快</p>
 <p>DNS 和CDN</p>
+<hr>
 
       
     </div>
@@ -400,7 +408,7 @@ Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js �
         <p><span>本文标题:</span><a href="/2015/09/14/自学笔记_1/">自学笔记_1</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Shao Feng 的个人博客">Shao Feng</a></p>
         <p><span>发布时间:</span>2015年09月14日 - 14时28分</p>
-        <p><span>最后更新:</span>2016年10月28日 - 00时00分</p>
+        <p><span>最后更新:</span>2016年10月28日 - 00时03分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2015/09/14/自学笔记_1/" title="自学笔记_1">http://yoursite.com/2015/09/14/自学笔记_1/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2015/09/14/自学笔记_1/　　作者: Shao Feng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
