@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/11/14/ionic自学笔记_1/index.html">
 <meta property="og:site_name" content="杨少峰个人博客">
 <meta property="og:description" content="最近自学一些ionic的一些笔记分享给大家，希望大家可以纠正一些我的错误认知，谢谢。">
-<meta property="og:updated_time" content="2016-11-04T15:50:07.532Z">
+<meta property="og:updated_time" content="2016-11-04T16:00:45.979Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ionic自学笔记_1">
 <meta name="twitter:description" content="最近自学一些ionic的一些笔记分享给大家，希望大家可以纠正一些我的错误认知，谢谢。">
@@ -275,6 +275,16 @@
 <p>以下是我安装环境遇到的一些问题：</p>
 <p>1：不要用淘宝的镜像，都用npm官方的<br>2：不要有中文目录<br>3：网络问题<br>4：检查自己配置的一些环境变量</p>
 <hr>
+<h2 id="关于手机开发"><a href="#关于手机开发" class="headerlink" title="关于手机开发:"></a>关于手机开发:</h2><p>原生/Native:使用原生SDK开发App。优点不用说，当你有足够的资源，这是最理想的方式；缺点是对不同的 平台要分别开发，成本高、周期长。</p>
+<p>原生脚本/NativeScript：将原生API封装成JavaScript接口，这有点像前端的nodejs。NativeScript方式 与原生相比性能损失不大（据称只有10%左右），优点是开发语言统一使用JavaScript，缺点是 要针对不同的平台分别开发。</p>
+<p>混合/Hybrid：使用web技术开发App，使用Cordova/PhoneGap之类进行打包封装。优点是采用标准的web技术开发， 避免了不同平台原生开发体系的学习，上手快、效率高；缺点是性能上有一定损失。</p>
+<p>ionic属于hybrid开发模式，本质上是将移动web应用与浏览器打包,优点和缺点都很明显。 是否采用这种模式，需要根据具体情况综合考虑。</p>
+<p>ionic主要包括三个部分：</p>
+<p>CSS框架 - 提供原生<em>App质感的CSS样式模拟</em>。ionic这部分的实现使用了ionicons图标样式库。</p>
+<p>JavaScript框架 - 提供移动Web应用开发框架。ionic基于AngularJS基础框架开发，因此 自然地遵循AngularJS的框架约束；此外，ionic使用AngularJS UI Router实现前端路由。</p>
+<p>命令行/CLI - 命令行工具集用来简化应用的开发、构造和仿真运行。ionic命令行工具使用了 Cordova，依赖于平台SDK（Android &amp; iOS）实现将移动web项目打包成原生app。</p>
+<p>使用ionic的时候要注意：由于ionic使用了HTML5和CSS3的新特性，要求IOS7+/Android4.1+</p>
+<hr>
 
       
     </div>
@@ -286,7 +296,7 @@
         <p><span>本文标题:</span><a href="/2016/11/14/ionic自学笔记_1/">ionic自学笔记_1</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Shao Feng 的个人博客">Shao Feng</a></p>
         <p><span>发布时间:</span>2016年11月14日 - 23时31分</p>
-        <p><span>最后更新:</span>2016年11月04日 - 23时50分</p>
+        <p><span>最后更新:</span>2016年11月05日 - 00时00分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/11/14/ionic自学笔记_1/" title="ionic自学笔记_1">http://yoursite.com/2016/11/14/ionic自学笔记_1/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2016/11/14/ionic自学笔记_1/　　作者: Shao Feng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -315,7 +325,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#杨少峰"><span class="toc-number">1.</span> <span class="toc-text">杨少峰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、什么是ionic？"><span class="toc-number">2.</span> <span class="toc-text">一、什么是ionic？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、ionic开发简介："><span class="toc-number">3.</span> <span class="toc-text">二、ionic开发简介：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、开发环境配置"><span class="toc-number">4.</span> <span class="toc-text">三、开发环境配置</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#杨少峰"><span class="toc-number">1.</span> <span class="toc-text">杨少峰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、什么是ionic？"><span class="toc-number">2.</span> <span class="toc-text">一、什么是ionic？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、ionic开发简介："><span class="toc-number">3.</span> <span class="toc-text">二、ionic开发简介：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、开发环境配置"><span class="toc-number">4.</span> <span class="toc-text">三、开发环境配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于手机开发"><span class="toc-number">5.</span> <span class="toc-text">关于手机开发:</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
